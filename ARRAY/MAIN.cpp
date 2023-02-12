@@ -14,24 +14,37 @@ int main ()
     ar.push(4);
     ar.push(5);
     ar.push(6);
+
     ar.push(1);
     ar.push(2);
     ar.push(3);
     ar.push(4);
     ar.push(5);
     ar.push(6);
+
     ar.push(1);
     ar.push(2);
     ar.push(3);
     ar.push(4);
     ar.push(5);
     ar.push(6);
+
     ar.push(1);
     ar.push(2);
     ar.push(3);
     ar.push(4);
     ar.push(5);
     ar.push(6);
+
+    ar.push(1);
+    ar.push(2);
+    ar.push(3);
+    ar.push(4);
+    ar.push(5);
+    ar.push(6);
+
+    ar.insert(99,2);
+
     ar.print();
     ar.GetInfo();
 

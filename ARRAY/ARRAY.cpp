@@ -68,4 +68,69 @@ public:
             _size++;
         }
     }
+    void insert(int index, T item)
+    {
+        if(index < 0 || index >= _size)
+        {
+            std::cerr << "Out of Range!\n";
+        }
+        else
+        {
+            if (_size == _capacity)
+            {
+                _capacity *= 2;
+                T* temp = new int[_capacity];
+                
+                for (int i = 0; i < index; i++)
+                {
+                    *(temp + i) = *(_array + i);
+                }
+                *(temp + index) = item;
+                for (int i = index + 1; i <= _size; i++)
+                {
+                    *(temp + i) = *(_array + i - 1);
+                }
+                _size++;
+                delete[] _array;
+                _array = temp;
+            }
+            else
+            { 
+                for (int i = _size - 1; i >= index; i--)
+                {
+                    *(_array + i + 1) = *(_array + i);
+                }
+                *(_array + index) = item;
+                _size++;
+            }
+        }
+        
+    }
+
+    void prepend(T item)
+    {
+        insert(0,item);
+    }
+
+    T pop(int index)
+    {
+        T returnValue = *(_array + index);
+
+        if(_size >= _capacity / 2)
+        {
+            
+        }
+        else
+        {
+
+        }
+
+
+
+
+
+
+
+        return returnValue;
+    }
 };

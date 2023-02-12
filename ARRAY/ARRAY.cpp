@@ -112,25 +112,40 @@ public:
         insert(0,item);
     }
 
-    T pop(int index)
+    void pop()
     {
-        T returnValue = *(_array + index);
-
-        if(_size >= _capacity / 2)
+        if(is_empty())
         {
-            
+            std::cerr<<"ARRAY is Empty!\n";
         }
         else
         {
+            if(_size - 1 == _capacity / 2)
+            {
+                _capacity /= 2;
+                T* temp = new int[_capacity];
 
+                for (int i = 0; i < _size; i++)
+                {
+                    *(temp + i) = *(_array + i);
+                }
+                _size--;
+                delete[] _array;
+                _array = temp;
+
+            }
+            else
+            {
+                T* temp = new int[_capacity];
+
+                for (int i = 0; i < _size - 1; i++)
+                {
+                    *(temp + i) = *(_array + i);
+                }
+                _size--;
+                delete[] _array;
+                _array = temp;
+            }
         }
-
-
-
-
-
-
-
-        return returnValue;
     }
 };

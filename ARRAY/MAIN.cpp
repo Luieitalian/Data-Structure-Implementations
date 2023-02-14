@@ -1,10 +1,8 @@
-#include<iostream>
-#include"ARRAY.cpp"
+#include <iostream>
+#include "ARRAY.cpp"
 using namespace std;
 
-
-
-int main ()
+int main()
 {
     ARRAY<int> ar;
 
@@ -22,18 +20,8 @@ int main ()
     ar.push(5);
     ar.push(6);
 
-    ar.push(1);
-    ar.push(2);
-    ar.push(3);
-    ar.push(4);
-    ar.push(5);
 
     ar.print();
-    ar.GetInfo();
 
-
-
-    
-    return 0;
-
+    cin.get();
 }

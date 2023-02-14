@@ -189,9 +189,9 @@ public:
             std::cin.get();
             std::exit(0);
         }
-        else if(index == 0)
+        else if (index == 0)
             push_front(item);
-        else if(index == size())
+        else if (index == size())
             push_back(item);
         else
         {
@@ -199,9 +199,9 @@ public:
             node *tmp = begin();
             while (tmp->next != NULL)
             {
-                if(count == index - 1)
+                if (count == index - 1)
                 {
-                    node* newnode = new node(item,tmp->next);
+                    node *newnode = new node(item, tmp->next);
 
                     tmp->next = newnode;
                     _size++;
@@ -211,7 +211,6 @@ public:
                 {
                     tmp = tmp->next;
                     count++;
-
                 }
             }
         }
@@ -226,19 +225,19 @@ public:
             std::cin.get();
             std::exit(0);
         }
-        else if(index == 0)
+        else if (index == 0)
             pop_front();
-        else if(index == size() - 1)
+        else if (index == size() - 1)
             pop_back();
         else
         {
-            node* tmp = begin();
+            node *tmp = begin();
             int count = 0;
-            while(tmp != NULL)
+            while (tmp != NULL)
             {
-                if(count == index - 1)
+                if (count == index - 1)
                 {
-                    node* point = tmp->next->next;
+                    node *point = tmp->next->next;
 
                     delete tmp->next;
                     tmp->next = point;
@@ -256,32 +255,32 @@ public:
 
     const T value_n_from_end(int n)
     {
-        if(n <= 0 || n > size())
+        if (n <= 0 || n > size())
         {
             system("color a");
             std::cerr << "Out of Range!\n";
             std::cin.get();
             std::exit(0);
         }
-        else if(is_empty())
+        else if (is_empty())
         {
             system("color a");
             std::cerr << "List is Empty!\n";
             std::cin.get();
             std::exit(0);
         }
-        else if(n == 1)
+        else if (n == 1)
             return back();
-        else if(n == size())
+        else if (n == size())
             return front();
         else
         {
             int item_index = size() - n;
             int count = 0;
-            node* tmp = begin();
-            while(tmp->next != NULL)
+            node *tmp = begin();
+            while (tmp->next != NULL)
             {
-                if(count = item_index)
+                if (count = item_index)
                 {
                     tmp = tmp->next;
                     return tmp->value;
@@ -297,28 +296,28 @@ public:
 
     void reverse()
     {
-        if(is_empty())
+        if (is_empty())
         {
             system("color a");
             std::cerr << "List is Empty!\n";
             std::cin.get();
             std::exit(0);
         }
-        else if(size() == 1)
+        else if (size() == 1)
         {
             return void();
         }
         else
         {
-            node* pointer_front = begin();
-            node* pointer_back = begin();
-            
+            node *pointer_front = begin();
+            node *pointer_back = begin();
+
             T tmp_value_front;
             T tmp_value_back;
 
-            for (int i = 0; i < size() / 2;i++)
+            for (int i = 0; i < size() / 2; i++)
             {
-                
+
                 for (int j = 0; j < i; j++)
                 {
                     pointer_front = pointer_front->next;
@@ -332,11 +331,41 @@ public:
                 tmp_value_back = pointer_back->value;
 
                 pointer_front->value = tmp_value_back;
-                pointer_back->value = tmp_value_front; 
-                
+                pointer_back->value = tmp_value_front;
+
                 pointer_front = begin();
                 pointer_back = begin();
             }
         }
     }
-};      
+
+    void remove_value(const T &value)
+    {
+        node *tmp = begin();
+
+        if (is_empty())
+        {
+            std::cerr << "List is Empty!\n";
+        }
+        else if (tmp->value == value)
+        {
+            erase(0);
+        }
+        else
+        {
+            int count = 1;
+            while (tmp->next != NULL)
+            {
+                tmp = tmp->next;
+                if (tmp->value == value)
+                {
+                    erase(count);
+                }
+                else
+                {
+                    count++;
+                }
+            }
+        }
+    }
+};

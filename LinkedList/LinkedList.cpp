@@ -283,6 +283,7 @@ public:
             {
                 if(count = item_index)
                 {
+                    tmp = tmp->next;
                     return tmp->value;
                 }
                 else
@@ -290,6 +291,51 @@ public:
                     tmp = tmp->next;
                     count++;
                 }
+            }
+        }
+    }
+
+    void reverse()
+    {
+        if(is_empty())
+        {
+            system("color a");
+            std::cerr << "List is Empty!\n";
+            std::cin.get();
+            std::exit(0);
+        }
+        else if(size() == 1)
+        {
+            return void();
+        }
+        else
+        {
+            node* pointer_front = begin();
+            node* pointer_back = begin();
+            
+            T tmp_value_front;
+            T tmp_value_back;
+
+            for (int i = 0; i < size() / 2;i++)
+            {
+                
+                for (int j = 0; j < i; j++)
+                {
+                    pointer_front = pointer_front->next;
+                }
+                tmp_value_front = pointer_front->value;
+
+                for (int k = 0; k < size() - i - 1; k++)
+                {
+                    pointer_back = pointer_back->next;
+                }
+                tmp_value_back = pointer_back->value;
+
+                pointer_front->value = tmp_value_back;
+                pointer_back->value = tmp_value_front; 
+                
+                pointer_front = begin();
+                pointer_back = begin();
             }
         }
     }

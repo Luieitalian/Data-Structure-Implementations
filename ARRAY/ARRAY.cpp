@@ -9,6 +9,33 @@ private:
 
     T *_array = new T[_capacity];
 
+    void grow()
+    {
+        _capacity *= 2;
+        T *temp = new T[capacity()];
+
+        for (int i = 0; i < _size; i++)
+        {
+            *(temp + i) = *(_array + i);
+        }
+        delete[] _array;
+        _array = temp;
+    }
+
+    void shrink()
+    {
+        _capacity /= 2;
+        T *temp = new T[capacity()];
+
+        for (int i = 0; i < size(); i++)
+        {
+            *(temp + i) = *(_array + i);
+        }
+        delete[] _array;
+        _array = temp;
+    }
+
+
 public:
     const void GetInfo() const
     {
@@ -38,34 +65,24 @@ public:
             return true;
         return false;
     }
-    T at(int index)
+    const T at(int index) const
     {
         if (index < 0 || index >= size())
-            exit(0);
+        {
+            std::cerr << "Out of Range!\n";
+            std::cin.get();
+            exit(1);
+        }
         else
             return *(_array + index);
     }
     void push(const T &item)
     {
-        if (size() == capacity())
-        {
-            _capacity *= 2;
-            T *temp = new int[capacity()];
-
-            for (int i = 0; i < _size; i++)
-            {
-                *(temp + i) = *(_array + i);
-            }
-            *(temp + _size) = item;
-            delete[] _array;
-            _array = temp;
-            _size++;
-        }
-        else
-        {
-            *(_array + _size) = item;
-            _size++;
-        }
+        if(size() == capacity())
+            grow();
+        
+        *(_array + _size) = item;
+        _size++;
     }
     void insert(int index, const T &item)
     {
@@ -78,7 +95,7 @@ public:
             if (size() == capacity())
             {
                 _capacity *= 2;
-                T *temp = new int[capacity()];
+                T *temp = new T[capacity()];
 
                 for (int i = 0; i < index; i++)
                 {
@@ -116,49 +133,108 @@ public:
         {
             std::cerr << "ARRAY is Empty!\n";
         }
+        else if (size() - 1 == capacity() / 2)
+        {
+            shrink();
+
+            T *temp = new T[capacity()];
+
+            for (int i = 0; i < size() - 1; i++)
+            {
+                *(temp + i) = *(_array + i);
+            }
+            delete[] _array;
+            _array = temp;
+            _size--;
+        }
         else
         {
-            if (size() - 1 == capacity() / 2)
-            {
-                _capacity /= 2;
-                T *temp = new int[capacity()];
+            T *temp = new T[capacity()];
 
-                for (int i = 0; i < size(); i++)
-                {
-                    *(temp + i) = *(_array + i);
-                }
-                _size--;
-                delete[] _array;
-                _array = temp;
-            }
-            else
+            for (int i = 0; i < size() - 1; i++)
             {
-                T *temp = new int[capacity()];
-
-                for (int i = 0; i < size() - 1; i++)
-                {
-                    *(temp + i) = *(_array + i);
-                }
-                _size--;
-                delete[] _array;
-                _array = temp;
+                *(temp + i) = *(_array + i);
             }
+            delete[] _array;
+            _array = temp;
+            _size--;
         }
     }
 
     void erase(int index)
     {
-        if(index < 0 || index >= size())
+        if (index < 0 || index >= size())
         {
             std::cerr << "Out of Range!\n";
+            std::cin.get();
+            exit(1);
         }
-        else if(index == size() - 1)
+        else if (index == size() - 1)
         {
-            this->pop();
+            pop();
+        }
+        else if (size() - 1 == capacity() / 2)
+        {
+            shrink();
+
+            T *temp = new T[capacity()];
+
+            for (int i = 0; i < index; i++)
+            {
+                *(temp + i) = *(_array + i);
+            }
+            for (int i = index; i < size(); i++)
+            {
+                *(temp + i) = *(_array + i + 1);
+            }
+
+            delete[] _array;
+            _array = temp;
+            _size--;
         }
         else
         {
-            
+            T *temp = new T[capacity()];
+
+            for (int i = 0; i < index; i++)
+            {
+                *(temp + i) = *(_array + i);
+            }
+            for (int i = index; i < size(); i++)
+            {
+                *(temp + i) = *(_array + i + 1);
+            }
+
+            delete[] _array;
+            _array = temp;
+            _size--;
+        }
+    }
+
+    int find(const T &item)
+    {
+        for (int i = 0; i < size(); i++)
+        {
+            if (*(_array + i) == item)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    void remove(const T &item)
+    {
+        if (is_empty())
+        {
+            std::cerr << "ARRAY is Empty!\n";
+        }
+        else
+        {
+            while (find(item) != -1)
+            {
+                erase(find(item));
+            }
         }
     }
 };

@@ -1,11 +1,16 @@
 #include <iostream>
-
+/**
+ * This is a Singly Linked List. It is capable of doing things a regular ARRAY could do. 
+*/
 template <typename T>
 class LinkedList
 {
 private:
     int _size = 0;
 
+    /**
+     * Basic node structure that contains value and pointer pairs.
+    */
     struct node
     {
         T value;

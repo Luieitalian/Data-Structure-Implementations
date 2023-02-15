@@ -53,7 +53,7 @@ public:
     /**
      *  Prints the elements of the array back to back with blank spaces.
      *  At the very left is the first element, at the very right is the last element.
-    */
+     */
     const void print() const
     {
         for (int i = 0; i < size(); i++)
@@ -62,7 +62,6 @@ public:
         }
         std::cout << std::endl;
     }
-
     const int size() const
     {
         return _size;
@@ -77,6 +76,9 @@ public:
             return true;
         return false;
     }
+    /**
+     * Provides an instance of the element at index.
+     */
     const T at(int index) const
     {
         if (index < 0 || index >= size())
@@ -88,7 +90,10 @@ public:
         else
             return *(_array + index);
     }
-    void push(const T &item)
+    /**
+     * Pushes the item to the back of the ARRAY. Grows if capacity is not enough for the process.
+     */
+    void push_back(const T &item)
     {
         if (size() == capacity())
             grow();
@@ -96,6 +101,9 @@ public:
         *(_array + _size) = item;
         _size++;
     }
+    /**
+     * Inserts the item at index. Grows if capacity is not enough for the process.
+     */
     void insert(int index, const T &item)
     {
         if (index < 0 || index >= size())
@@ -133,12 +141,16 @@ public:
             }
         }
     }
-
-    void prepend(const T &item)
+    /**
+     * Pushes the item to the front of the ARRAY. Grows if capacity is not enough for the process.
+     */
+    void push_front(const T &item)
     {
         insert(0, item);
     }
-
+    /**
+     * Pops the last element of the ARRAY. Shrinks if capacity is bigger than it needed to be.
+     */
     void pop()
     {
         if (is_empty())
@@ -172,7 +184,9 @@ public:
             _size--;
         }
     }
-
+    /**
+     * Erases the element at the index. Shrinks if capacity is bigger than it needed to be.
+     */
     void erase(int index)
     {
         if (index < 0 || index >= size())
@@ -222,7 +236,9 @@ public:
             _size--;
         }
     }
-
+    /**
+     * Finds the item starting from the front of the ARRAY. If not found returns -1.
+    */
     int find(const T &item)
     {
         for (int i = 0; i < size(); i++)
@@ -234,7 +250,9 @@ public:
         }
         return -1;
     }
-
+    /**
+     * Removes all of the occurences of the item in the ARRAY. Shrinks if capacity is bigger than it needed to be.
+    */
     void remove(const T &item)
     {
         if (is_empty())

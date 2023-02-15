@@ -1,5 +1,10 @@
 #include <iostream>
-
+/**
+ *
+ * This ARRAY type is capable of growing and shrinking its capacity, removing items, adding items and
+ * inserting items.
+ *
+ */
 template <typename T>
 class ARRAY
 {
@@ -35,13 +40,20 @@ private:
         _array = temp;
     }
 
-
 public:
+    /**
+     *  Provides the following info:
+     *  size, capacity, emptiness
+     */
     const void GetInfo() const
     {
         std::cout << "Size : " << size() << "\nCapacity : " << capacity() << "\nEmpty : " << std::boolalpha << is_empty();
         std::cout << std::endl;
     }
+    /**
+     *  Prints the elements of the array back to back with blank spaces.
+     *  At the very left is the first element, at the very right is the last element.
+    */
     const void print() const
     {
         for (int i = 0; i < size(); i++)
@@ -78,9 +90,9 @@ public:
     }
     void push(const T &item)
     {
-        if(size() == capacity())
+        if (size() == capacity())
             grow();
-        
+
         *(_array + _size) = item;
         _size++;
     }

@@ -6,7 +6,7 @@
  *
  */
 template <typename T>
-class ARRAY
+class Array
 {
 private:
     int _size = 0;
